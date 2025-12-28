@@ -1,0 +1,5 @@
+aiohttp~=3.13.2
+etcd3~=0.12.0
+setuptools~=68.2.0
+habot~=0.1.0
+aiogram~=3.23.0
