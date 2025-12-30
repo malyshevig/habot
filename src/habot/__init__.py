@@ -1,8 +1,8 @@
 from __future__ import absolute_import
 
-__author__ = 'Louis Taylor'
-__email__ = 'louis@kragniz.eu'
-__version__ = '0.1.0'
+__author__ = 'Ilya Malyshev'
+__email__ = 'ilia.malishev@gmail.com'
+__version__ = '0.1.1'
 
 
 from .bot import HaBot

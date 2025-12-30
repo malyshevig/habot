@@ -175,6 +175,7 @@ class HaBot(ABC):
 
             except Exception as e:
                 logger.error(f"Error processing update: {e}")
+                raise Exception(e)
 
     async def send_message(self, chat_id, text, **kwargs):
         """Отправка сообщения"""

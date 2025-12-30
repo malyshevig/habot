@@ -1,0 +1,8 @@
+setup.py
+src/habot/__init__.py
+src/habot/bot.py
+src/habot/election.py
+src/habot.egg-info/PKG-INFO
+src/habot.egg-info/SOURCES.txt
+src/habot.egg-info/dependency_links.txt
+src/habot.egg-info/top_level.txt
