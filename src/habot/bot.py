@@ -174,7 +174,7 @@ class HaBot(ABC):
                     await self.election.save_offset(update_id)
 
             except Exception as e:
-                logger.error(f"Error processing update: {e}")
+                logger.exception(f"Error processing update: {e}")
                 raise Exception(e)
 
     async def send_message(self, chat_id, text, **kwargs):
@@ -186,4 +186,4 @@ class HaBot(ABC):
                 **kwargs
             )
         except Exception as e:
-            logger.error(f"Failed to send message: {e}")
+            logger.exception(f"Failed to send message: {e}")

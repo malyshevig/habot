@@ -9,15 +9,17 @@ from datetime import datetime
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s [%(filename)s:%(lineno)d] %(message)s")
 
+def extrect_host_port(s:str):
+    l = s.split(":")
+    return l[0], int(l[1])
+
 
 class ElectionConfig:
     def __init__(self, service_name: str, etcd_hosts: list,
-                 etcd_port=2379,
                  lease_ttl: int = 15,
                  health_check_interval: int = 5):
         self.service_name = service_name
         self.etcd_hosts = etcd_hosts
-        self.etcd_port = etcd_port
         self.lease_ttl = lease_ttl
         self.health_check_interval = health_check_interval
 
@@ -28,9 +30,13 @@ class LongPollingLeaderElection:
             config: ElectionConfig,
             on_elected_callback: Callable = None,
             on_slave_callback: Callable = None,
-
     ):
-        self.etcd = etcd3.client(host=config.etcd_hosts[0], port=config.etcd_port)
+        host, port = extrect_host_port(config.etcd_hosts[0])
+
+        self.etcd = etcd3.client(host=host, port=port)
+        for host in config.etcd_hosts[1:]:
+            self.etcd.add_member(host)
+
         self.lease_ttl = config.lease_ttl
         self.health_check_interval = config.health_check_interval
 
