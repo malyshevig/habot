@@ -283,5 +283,4 @@ class LongPollingLeaderElection:
             self.etcd.delete(self.health_key)
         except:
             pass
-
         logger.info(f"Instance {self.instance_id} stopped")
