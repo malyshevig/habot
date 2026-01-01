@@ -29,7 +29,7 @@ class LongPollingLeaderElection:
         for host_url in hosts:
             logger.info (f"trying  to connect {host_url}")
             try:
-                host, port = extrect_host_port(config.host)
+                host, port = extrect_host_port(host_url)
                 return etcd3.client(host=host, port=port)
             except Exception as ex:
                 logger.error(f"trying  to connect {host_url} {ex}")
