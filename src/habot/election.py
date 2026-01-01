@@ -34,8 +34,9 @@ class LongPollingLeaderElection:
         host, port = extrect_host_port(config.etcd_hosts[0])
 
         self.etcd = etcd3.client(host=host, port=port)
-        for host in config.etcd_hosts[1:]:
-            self.etcd.add_member(host)
+        other_hosts = config.etcd_hosts[1:]
+        if len(other_hosts)>0:
+            self.etcd.add_member(other_hosts)
 
         self.lease_ttl = config.lease_ttl
         self.health_check_interval = config.health_check_interval
