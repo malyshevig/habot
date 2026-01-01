@@ -25,18 +25,25 @@ class ElectionConfig:
 
 
 class LongPollingLeaderElection:
+    def get_client(self, hosts):
+        for host_url in hoats:
+            logger.info (f"trying  to connect {host_url}")
+            try:
+                host, port = extrect_host_port(config.host)
+                return etcd3.client(host=host, port=port)
+            except Exception as ex:
+                logger.error(f"trying  to connect {host_url} {ex}")
+
+
     def __init__(
             self,
             config: ElectionConfig,
             on_elected_callback: Callable = None,
             on_slave_callback: Callable = None,
     ):
-        host, port = extrect_host_port(config.etcd_hosts[0])
+        #host, port = extrect_host_port(config.etcd_hosts[0])
 
-        self.etcd = etcd3.client(host=host, port=port)
-        other_hosts = config.etcd_hosts[1:]
-        if len(other_hosts)>0:
-            self.etcd.add_member(other_hosts)
+        self.etcd = self.get_client(config.etcd_hosts)
 
         self.lease_ttl = config.lease_ttl
         self.health_check_interval = config.health_check_interval
