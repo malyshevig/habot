@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 __author__ = 'Ilya Malyshev'
 __email__ = 'ilia.malishev@gmail.com'
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 
 from .bot import HaBot
